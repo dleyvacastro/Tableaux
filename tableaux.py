@@ -60,24 +60,31 @@ def imprime_hoja(H):
 		cadena += Inorder(f)
 	return cadena + "}"
 
-def par_complementario(l):
-	# Esta función determina si una lista de solo literales
-	# contiene un par complementario
-	# Input: l, una lista de literales
-	# Output: True/False
+def par_complementario(test):
+	for element in test:
+		if complemento(element) in test:
+			return True
+		else:
+			continue
 	return False
 
 def es_literal(f):
-	# Esta función determina si el árbol f es un literal
-	# Input: f, una fórmula como árbol
-	# Output: True/False
-	return False
+	if f.label in binarios:
+		return False
+	elif f.label in negacion:
+		f = f.right
+		if f.label in negacion:
+			return False
+		return es_literal(f)
+	else:
+		return True
 
 def no_literales(l):
-	# Esta función determina si una lista de fórmulas contiene
-	# solo literales
-	# Input: l, una lista de fórmulas como árboles
-	# Output: None/f, tal que f no es literal
+	length = l.__len__()
+	for i in range(length):
+		element = l[i]
+		if es_literal(element) == False:
+			return True
 	return False
 
 def clasifica(a):
