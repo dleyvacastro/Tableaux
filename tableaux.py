@@ -32,6 +32,7 @@ def Inorder(f):
 	else:
 		return "(" + Inorder(f.left) + f.label + Inorder(f.right) + ")"
 
+
 def StringtoTree(A):
     # Crea una formula como tree dada una formula como cadena escrita en notacion polaca inversa
     # Input: A, lista de caracteres con una formula escrita en notacion polaca inversa
@@ -42,6 +43,7 @@ def StringtoTree(A):
 
 	p = letrasProposicionales[0] # ELIMINE ESTA LINEA LUEGO DE INCLUIR EL CODIGO DE STRING2TREE
 	return Tree(p, None, None) # ELIMINE ESTA LINEA LUEGO DE INCLUIR EL CODIGO DE STRING2TREE
+
 
 ##############################################################################
 # Definición de funciones de tableaux
@@ -78,6 +80,27 @@ def no_literales(l):
 	# Output: None/f, tal que f no es literal
 	return False
 
+def clasifica(a):
+    if a.label == '-':
+        #alfa
+        if a.right.left == None:
+            return "1ALFA"
+        elif a.right.label == 'O':
+            return "3ALFA"
+        elif a.right.label == '>':
+            return "4ALFA"
+        #beta
+        elif a.right.label == 'Y' :
+            return "1BETA"
+    elif a.label == 'Y':
+        return "2ALFA"
+    elif a.label == 'O':
+        return "2BETA"
+    elif a.label == '>':
+        return "3BETA"
+        
+        
+
 def clasifica_y_extiende(f):
 	# clasifica una fórmula como alfa o beta y extiende listaHojas
 	# de acuerdo a la regla respectiva
@@ -98,3 +121,4 @@ def Tableaux(f):
 	listaHojas = [[A]]
 
 	return listaInterpsVerdaderas
+
