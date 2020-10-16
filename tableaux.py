@@ -255,4 +255,3 @@ def Tableaux(f):
 
 	return listaInterpsVerdaderas
 
-Tableaux('qpO-sr>-Y--')
