@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Implementación de los tableros semánticos (tableaux)
 # Input: cadena de la formula en notacion inorder
 # Output: lista de listas de literales
@@ -9,7 +7,8 @@ import tableaux as T
 
 # Fórmula (en notación polaca inversa)
 # para obtener uno de sus tableaux
-formula = "pq>-rO"
+formula = 'p-pY-'
+
 
 # Se crea el tableau
 ta = T.Tableaux(formula)
