@@ -250,5 +250,3 @@ def Tableaux(f):
 
 	return listaInterpsVerdaderas
 
-sz = Tree('alpha',None,None)
-print(es_literal(sz))
