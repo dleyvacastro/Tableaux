@@ -10,7 +10,8 @@ from random import choice
 ##############################################################################
 
 # Crea los conectivos
-conectivos = ['Y', 'O', '>', '-']
+binarios = ['Y', 'O', '>', '<->']
+negacion = ['-']
 # Crea las letras minúsculas a-z
 letrasProposicionales = [chr(x) for x in range(97, 123)]
 # inicializa la lista de interpretaciones
