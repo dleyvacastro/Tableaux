@@ -131,11 +131,6 @@ def es_literal(f):
     if (f.label == "-"):
         if(f.right.label in letrasProposicionales):
             return True
-        elif(f.right.label == "-"):
-            if (f.right.right.label in letrasProposicionales):
-                return True
-        else:
-            return False
     if(f.label in letrasProposicionales):
         return True
     return False
@@ -148,7 +143,7 @@ def no_literales(l):
 	# Output: None/f, tal que f no es literal
     for i in l:
        if (es_literal(i) == False):
-            return i
+            return True
         
     return None
 
@@ -255,3 +250,5 @@ def Tableaux(f):
 
 	return listaInterpsVerdaderas
 
+sz = Tree('alpha',None,None)
+print(es_literal(sz))
