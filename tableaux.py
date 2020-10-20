@@ -122,19 +122,18 @@ def par_complementario(l):
         for j in indices:
             if (Inorder(i) == Inorder(complemento(j))):
                 return True
-    return False
 
 
 def es_literal(f):
-	# Esta función determina si el árbol f es un literal
-	# Input: f, una fórmula como árbol
-	# Output: True/False
-    if (f.label == "-"):
-        if(f.right.label in letrasProposicionales):
-            return True
-    if(f.label in letrasProposicionales):
+    if f.label in binarios:
+        return False
+    elif f.label in negacion:
+        f = f.right
+        if f.label in negacion:
+            return False
+        return es_literal(f)
+    else:
         return True
-    return False
 
 
 def no_literales(l):
@@ -144,7 +143,7 @@ def no_literales(l):
 	# Output: None/f, tal que f no es literal
     for i in l:
        if (es_literal(i) == False):
-            return i
+            return True
         
     return None
 
@@ -154,7 +153,7 @@ def clasificacion(f):
 	# Output: string de la clasificación de la formula
     if f.label == '-':
         #alfa
-        if f.right.label == '-':
+        if f.right.left == '-':
             return '1alfa'
         elif f.right.label == 'O':
             return '3alfa'
@@ -163,16 +162,14 @@ def clasificacion(f):
         #beta
         elif f.right.label == 'Y' :
             return '1beta'
-        else:
-            return "Error en la clasificacion."
+	return "Error en la clasificación"
     elif f.label == 'Y':
         return '2alfa'
     elif f.label == 'O':
         return '2beta'
     elif f.label == '>':
         return '3beta'
-    else:
-        return "Error en la clasificacion."
+    return "Error en la clasificación"
         
 def clasifica_y_extiende(f, h):
 	# Extiende listaHojas de acuerdo a la regla respectiva
@@ -196,7 +193,7 @@ def clasifica_y_extiende(f, h):
         listaHojas.remove(h)
         listaHojas.append(aux)
     elif clase == '2alfa':
-        aux = [x for x in h if x!=f] + [f.left, f.right]
+        aux = [x for x in h if x!=f] + [f.right] + [f.left]
         listaHojas.remove(h)
         listaHojas.append(aux)
     elif clase == '3alfa':
@@ -255,14 +252,3 @@ def Tableaux(f):
 
 	return listaInterpsVerdaderas
 
-f = Inorder2Tree('(pYq)')
-
-h = [f, Inorder2Tree('-q')]
-
-listaHojas = [h]
-
-clasifica_y_extiende(f, h)
-
-print(listaHojas)
-
-imprime_listaHojas(listaHojas)
